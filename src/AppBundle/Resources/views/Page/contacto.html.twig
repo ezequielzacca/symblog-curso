@@ -1,0 +1,32 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}Contacto{% endblock%}
+
+{% block body %}
+    <header>
+        <h1>Contactenos</h1>
+    </header>
+
+    <p>Quiere contactar al staff de Symblog?</p>
+    
+    {% for flashMessage in app.session.flashbag.get('exito') %}
+        <div class="flash-notice">
+        <div class="blogger-notice">
+            
+            {{ flashMessage }}
+            
+        </div>
+        </div>
+    {% endfor %}    
+    <form class="blogger" action="{{ path('contacto') }}" {{ form_enctype(formulario) }} method="post">
+        {{ form_errors(formulario) }}
+        
+        {{ form_row(formulario.nombre) }}
+        {{ form_row(formulario.email) }}
+        {{ form_row(formulario.asunto) }}
+        {{ form_row(formulario.cuerpo) }}
+        
+        {{ form_rest(formulario) }}
+       <input type="submit" value="Enviar!" />
+    </form>    
+{% endblock %}
