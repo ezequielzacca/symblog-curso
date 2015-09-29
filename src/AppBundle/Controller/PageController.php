@@ -31,7 +31,7 @@ class PageController extends Controller
             $message = \Swift_Message::newInstance()
                     ->setSubject($consulta->getAsunto())
                     ->setFrom($consulta->getEmail())
-                    ->setTo('cursosymblog@gmail.com')
+                    ->setTo($this->container->getParameter('contact_email'))
                     ->setBody(
                             $this->renderView('AppBundle:Page:emailContacto.txt.twig'
                                     ,array('consulta'=>$consulta))

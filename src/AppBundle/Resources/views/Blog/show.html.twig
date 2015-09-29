@@ -1,0 +1,18 @@
+ {% extends 'AppBundle::layout.html.twig' %}
+ 
+ {% block title %}{{ post.titulo }}{% endblock %}
+ 
+ {% block body %}
+   <article class="blog">
+       <header>
+           
+           <div class="date"><time>{{ post.fechaCreacion | date('d/m/Y') }}</time></div>
+           
+       </header>
+     <img src="{{ asset('imagenes/' ~ post.imagen) }}" alt="{{ post.titulo }}" class="large" />
+     <div>
+         <p>{{ post.cuerpo }}</p>
+     </div>
+   </article>
+     
+ {% endblock %}
