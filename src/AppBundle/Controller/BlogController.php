@@ -21,13 +21,10 @@ class BlogController extends Controller
         //$em = $this->get('doctrine')->getManager();
         $post = $em->getRepository('AppBundle:Post')->find($id);
         if(!$post){
+            
             throw $this->createNotFoundException('No se encontro ningun Post con ese ID');
         }
-        $comentarios = $em->createQueryBuilder('c')
-                ->select('c')->from('AppBundle:Comentario','c')
-                ->where('c.post = :post')
-                ->setParameter('post',$id)
-                ->getQuery()->getResult();
+        $comentarios = $em->getRepository('AppBundle:Comentario')->findByPost($id);
         return array('post'=>$post,'comentarios'=>$comentarios);
         
     }
