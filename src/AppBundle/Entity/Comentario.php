@@ -25,7 +25,7 @@ class Comentario
     /**
      * @var string
      *
-     * @ORM\Column(name="usuario", type="string", length=50)
+     * @ORM\Column(name="usuario", type="string", length=100)
      */
     private $usuario;
 

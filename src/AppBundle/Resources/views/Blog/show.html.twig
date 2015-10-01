@@ -14,5 +14,20 @@
          <p>{{ post.cuerpo }}</p>
      </div>
    </article>
-     
+     <section class="comments" id="comments">
+         <section class="previous-comments">
+             <h3>Comentarios: </h3>
+             {% include 'AppBundle:Blog:includes/showComments.html.twig' with { comentarios:comentarios } %}
+         </section>
+     </section>
+         {% for flashMessage in app.session.flashbag.get('exito') %}
+        <div class="flash-notice">
+        <div class="blogger-notice">
+            
+            {{ flashMessage }}
+            
+        </div>
+        </div>
+    {% endfor %}  
+     {% render(controller( 'AppBundle:Blog:comentario' , { id:post.id })) %}
  {% endblock %}

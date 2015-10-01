@@ -1,0 +1,14 @@
+{% for comentario in comentarios %}
+                 <article class="comment {{ cycle(['odd','even'], loop.index) }}" if="comment-{{ comentario.id }}">
+                     <header>
+                         <p>
+                             <span class="highlight">{{ comentario.usuario }}</span>
+                         </p>
+                     </header>
+                         <p>
+                             {{ comentario.cuerpo }}
+                         </p>
+                 </article>   
+             {% else %}
+                 <p> Todavia no hay comentarios para este Post, se el primero en comentar... </p>
+             {% endfor %}
