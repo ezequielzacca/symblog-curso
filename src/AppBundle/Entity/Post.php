@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Comentario;
 
 /**
  * Post
@@ -63,6 +64,10 @@ class Post
      */
     private $fechaActualizacion;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comentario", mappedBy="post")
+     */
+    private $comentarios;
 
     /**
      * Get id
@@ -210,5 +215,45 @@ class Post
     public function getFechaActualizacion()
     {
         return $this->fechaActualizacion;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->comentarios = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add comentarios
+     *
+     * @param \AppBundle\Entity\Comentario $comentarios
+     * @return Post
+     */
+    public function addComentario(Comentario $comentarios)
+    {
+        $this->comentarios[] = $comentarios;
+
+        return $this;
+    }
+
+    /**
+     * Remove comentarios
+     *
+     * @param \AppBundle\Entity\Comentario $comentarios
+     */
+    public function removeComentario(Comentario $comentarios)
+    {
+        $this->comentarios->removeElement($comentarios);
+    }
+
+    /**
+     * Get comentarios
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getComentarios()
+    {
+        return $this->comentarios;
     }
 }

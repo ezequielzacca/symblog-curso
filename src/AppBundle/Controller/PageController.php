@@ -59,7 +59,15 @@ class PageController extends Controller
      * @Template()
      */
     public function indexAction(){
-        return $this->render('AppBundle:Page:index.html.twig',array());
+        $em = $this->getDoctrine()->getManager();
+        
+        $qb = $em->createQueryBuilder();
+        $posts = $qb->select('p')->from('AppBundle:Post','p')
+                ->addOrderBy('p.fechaCreacion','DESC')->setMaxResults(10)
+                ->getQuery()->getResult();
+        
+        
+        return $this->render('AppBundle:Page:index.html.twig',array('posts'=>$posts));
     }
     
     

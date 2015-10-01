@@ -1,5 +1,18 @@
 {% extends 'AppBundle::layout.html.twig' %}
 
 {% block body %}
-    Home del Blog
+    {% for post in posts %}
+         <article class="blog">
+       <header>
+           
+           <div class="date"><time>{{ post.fechaCreacion | date('d/m/Y') }}</time></div>
+           <h2><a href="{{ path('blog_show',{'id':post.id}) }}">{{ post.titulo }}</a></h2>
+       </header>
+     <img src="{{ asset('imagenes/' ~ post.imagen) }}" alt="{{ post.titulo }}" class="large" />
+     <div>
+         <p>{{ post.cuerpo(200) }}</p>
+         <p><a href="{{ path('blog_show',{'id':post.id}) }}">Ver Mas...</a></p>
+     </div>
+   </article>
+    {% endfor %}
 {% endblock %}
